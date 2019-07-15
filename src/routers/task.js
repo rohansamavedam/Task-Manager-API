@@ -21,6 +21,7 @@ router.post('/tasks', auth, async (req, res) => {
 //GET /tasks?completed=true
 //GET /tasks?limit=2
 //GET /tasks?skip=2 
+//GET /tasks?sortBy=-1
 router.get('/tasks', auth, async (req, res) => {
     if(req.query.completed === 'true'){
         try{
@@ -29,7 +30,10 @@ router.get('/tasks', auth, async (req, res) => {
                 completed: req.query.completed
             },null, {
                 limit: parseInt(req.query.limit),
-                skip: parseInt(req.query.skip)
+                skip: parseInt(req.query.skip),
+                sort: {
+                    createdAt: -1
+                }
             })
             res.status(201).send(tasks)
         }
@@ -43,7 +47,10 @@ router.get('/tasks', auth, async (req, res) => {
                 completed: req.query.completed
             },null, {
                 limit: parseInt(req.query.limit),
-                skip: parseInt(req.query.skip)
+                skip: parseInt(req.query.skip),
+                sort: {
+                    createdAt: -1
+                }
             })
             res.status(201).send(tasks)
         }
@@ -56,7 +63,10 @@ router.get('/tasks', auth, async (req, res) => {
                 owner: req.user._id
             },null, {
                 limit: parseInt(req.query.limit),
-                skip: parseInt(req.query.skip)
+                skip: parseInt(req.query.skip),
+                sort: {
+                    createdAt: -1
+                }
             })
             res.status(201).send(tasks)
         }
